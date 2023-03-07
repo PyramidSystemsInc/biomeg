@@ -7,5 +7,5 @@ import com.psiit.biomegoss.entity.TransformRequest;
  */
 public interface XmlService {
 	public String convertXml(String inputXml, TransformRequest transformRequest) throws Exception;
-    public String identApiCall(String inputXml) throws Exception;
+    public String mockIdent(String inputXml, TransformRequest transformRequest) throws Exception;
 }

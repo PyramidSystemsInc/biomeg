@@ -40,7 +40,7 @@ public class XmlController {
             description="Accepts a file and a transformation request that specifies input and output format, as well " +
                     "as a map containing an XPath and a substitution value.",
             tags={"xml"})
-    @PostMapping(value="/convertXml", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value="/convert", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @RequestBody(content = @Content(encoding = @Encoding(name = "transformRequest", contentType = "application/json")))
     public String convertXmlWithMap(@RequestPart("transformRequest") TransformRequest transformRequest, @RequestPart("file") MultipartFile file) throws Exception {
         return xmlService.convertXml(new String(file.getInputStream().readAllBytes(), StandardCharsets.UTF_8), transformRequest);
@@ -56,9 +56,9 @@ public class XmlController {
     @Operation(summary="Mock DHS IDENT endpoint",
             description="Accepts a DHS IXM formatted request file and returns a mock response.",
             tags={"xml"})
-    @PostMapping(value="/identApiCall")
-    @RequestBody(content = @Content(encoding = @Encoding(contentType = "application/json")))
-    public String identApiCall(@RequestPart("transformRequest") TransformRequest transformRequest) throws Exception {
-        return xmlService.identApiCall(String.valueOf(transformRequest));
+    @PostMapping(value="/mock/ident")
+    @RequestBody(content = @Content(encoding = @Encoding(name = "transformRequest", contentType = "application/json")))
+    public String identApiCall(@RequestPart("transformRequest") TransformRequest transformRequest, @RequestPart("file") MultipartFile file) throws Exception {
+        return xmlService.mockIdent(new String(file.getInputStream().readAllBytes(), StandardCharsets.UTF_8), transformRequest);
     }
 }

@@ -73,15 +73,12 @@ public class XmlServiceImpl implements XmlService {
      * Returns mock IDENT response.
      *
      * @param inputXml
-     * @return mock XML
+     * @return converted XML
      * @throws Exception
      */
     @Override
-    public String identApiCall(String inputXml) throws Exception {
-       //make Ident api call
-        String identResponseXml;
-        identResponseXml=inputXml; //todo:
-        return identResponseXml;
+    public String mockIdent(String inputXml, TransformRequest transformRequest) throws Exception {
+        return xmlTransform(inputXml,  "ixm-ident.xsl", transformRequest.getXpath2values());
     }
 
     /**

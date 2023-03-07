@@ -3,10 +3,10 @@ This is the Biometric Message Exchange Gateway library that performs translation
 biometric request and response XML documents.
 
 ## Endpoints
-| Method | Path                | Description                                                   |
-|--------|---------------------|---------------------------------------------------------------|
-| POST   | `/xml/convertXml`   | Translates the input XML and returns a converted XML document |
-| POST   | `/xml/identApiCall` | Mocks a call to the DHS identification service                |
+| Method | Path              | Description                                                   |
+|--------|-------------------|---------------------------------------------------------------|
+| POST   | `/xml/convert`    | Translates the input XML and returns a converted XML document |
+| POST   | `/xml/mock/ident` | Mocks a call to the DHS identification service                |
 
 For more details, please check out the [Swagger](http://localhost:8080/swagger-ui/index.html) endpoint.
 
@@ -31,6 +31,34 @@ Alternatively, you can use Maven to run it from the command line:
 ```shell
 mvn spring-boot:run
 ```
+## Building and running a Docker image
+
+### Build the image
+From within the project directory:
+```shell
+docker build -t biomeg-oss .
+```
+This will create an image called `biomeg-oss` using a
+[multistage build](https://docs.docker.com/develop/develop-images/multistage-build/https://docs.docker.com/develop/develop-images/multistage-build/).
+
+### Run the image in a Docker container
+```shell
+docker run --rm --name biomeg-oss -p 8080:8080 biomeg-oss
+```
+This runs a Docker container named `biomeg-oss`. The API endpoints will be available at:
+
+[http://localhost:8080](http://localhost:8080)
+
+### Check docker container logs
+
+```shell
+docker logs -f biomeg-oss
+```
+
+### Remove/Stop the container
+```shell
+docker stop biomeg-oss
+```
 
 ### Access the application
 - [http://localhost:8080](http://localhost:8080)
@@ -50,3 +78,7 @@ mvn clean test
 ```shell
 target/site/jacoco
 ```
+
+## License
+
+[MIT license](LICENSE)
